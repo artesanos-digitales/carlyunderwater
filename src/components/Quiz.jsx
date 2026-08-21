@@ -45,49 +45,49 @@ const questions = [
     id: 5,
     question: '¿Cómo defines tu inversión para este proyecto?',
     options: [
-      { text: 'Quiero algo accesible ($2,000 MXN) para probar si el buceo es para mí.', scores: { scuba: 3, openwater: 0, junior: 0, scubadiver: 0 } },
-      { text: 'Estoy listo para la inversión completa de formación internacional ($9,000 MXN).', scores: { scuba: 0, openwater: 3, junior: 0, scubadiver: 0 } },
-      { text: 'Priorizo la seguridad y educación de mi hijo/a por encima de todo ($9,000 MXN).', scores: { scuba: 0, openwater: 0, junior: 3, scubadiver: 0 } },
-      { text: 'Busco un punto medio entre costo, tiempo y certificación oficial ($6,000 MXN).', scores: { scuba: 0, openwater: 0, junior: 0, scubadiver: 3 } },
+      { text: 'Quiero algo accesible ($2,350 MXN) para probar si el buceo es para mí.', scores: { scuba: 3, openwater: 0, junior: 0, scubadiver: 0 } },
+      { text: 'Estoy listo para la inversión completa de formación internacional ($9,900 MXN).', scores: { scuba: 0, openwater: 3, junior: 0, scubadiver: 0 } },
+      { text: 'Quiero celebrar una ocasión especial bajo el agua ($2,500 MXN).', scores: { scuba: 0, openwater: 0, junior: 3, scubadiver: 0 } },
+      { text: 'Busco un punto medio entre costo, tiempo y certificación oficial ($8,500 MXN).', scores: { scuba: 0, openwater: 0, junior: 0, scubadiver: 3 } },
     ]
   },
 ]
 
 const results = {
   scuba: {
-    title: 'Experiencia Scuba',
-    price: '$2,000 MXN',
+    title: 'Iniciación al buceo',
+    price: '$2,350 MXN',
     level: 'Principiante',
     match: 95,
     description: '¡Tu primera inmersión te espera! Vive la experiencia de respirar bajo el agua por primera vez. Una mañana inolvidable en el Sistema Arrecifal Veracruzano.',
-    highlights: ['Sin experiencia necesaria', 'Solo una mañana (~6 horas)', 'Equipo completo incluido', '5 fotografías subacuáticas'],
+    highlights: ['Sin experiencia necesaria', 'Solo una mañana (~6 horas)', 'Equipo completo incluido', 'Fotografías / video bajo el agua'],
     color: 'from-neon-cyan to-blue-500'
   },
   junior: {
-    title: 'Junior Open Water Diver SNSI',
-    price: '$9,000 MXN',
+    title: 'Paquete cumpleañero',
+    price: '$2,500 MXN',
     level: 'Principiante',
     match: 92,
-    description: 'La aventura submarina perfecta para jóvenes de 10 a 14 años. Certificación internacional adaptada a su edad, en un ambiente seguro y divertido.',
-    highlights: ['Para jóvenes 10-14 años', 'Certificación junior internacional', 'Curso adaptado al menor', '10 fotografías + video'],
+    description: 'Celebra una ocasión especial bajo el agua con una experiencia divertida, segura y llena de recuerdos.',
+    highlights: ['Buceo y snorkel', 'Cartel de cumpleaños', 'Pastel con velita de buzo / buza', 'Fotografías y video'],
     color: 'from-purple-500 to-pink-500'
   },
   openwater: {
-    title: 'Open Water Diver SNSI',
-    price: '$9,000 MXN',
+    title: 'Open Water Diver',
+    price: '$9,900 MXN',
     level: 'Principiante',
     match: 88,
     description: 'Tu paso hacia la certificación internacional completa. Desbloquea el acceso a bucear hasta 18 metros en cualquier parte del mundo, de por vida.',
-    highlights: ['Certificación internacional SNSI', '4 días de formación', 'Hasta 18 metros de profundidad', '10 fotografías + video'],
+    highlights: ['5 clases teóricas en línea', '4 días de buceo en mar', 'Fotografías y videos', 'Certificación y trámites'],
     color: 'from-orange-500 to-red-500'
   },
   scubadiver: {
-    title: 'Scuba Diver SNSI',
-    price: '$6,000 MXN',
+    title: 'Open Water Diver',
+    price: '$8,500 MXN',
     level: 'Principiante',
     match: 90,
-    description: '¿Tienes poco tiempo pero quieres una certificación oficial? Certifícate en 2 días y bucea hasta 12 metros en cualquier parte del mundo.',
-    highlights: ['Certificación oficial SNSI', 'Solo 2 días intensivos', 'Hasta 12 metros de profundidad', '5 fotografías + video'],
+    description: 'Obtén tu certificación con un programa que combina clases teóricas, buceo en alberca y prácticas en el Sistema Arrecifal Veracruzano.',
+    highlights: ['5 clases teóricas en línea', '2 días de mar y 2 de alberca', 'Fotografías y videos', 'Certificación y trámites'],
     color: 'from-neon-lime to-green-500'
   }
 }

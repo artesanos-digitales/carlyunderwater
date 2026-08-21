@@ -15,7 +15,7 @@ const faqs = [
   },
   {
     q: '¿Cuánto dura la experiencia?',
-    a: 'Experiencia Scuba es una única inmersión, un tanque puede durar desde 30 minutos hasta 45 minutos, dependiendo de tu consumo de aire. Te citaré 8 am, saldremos al mar y regresaremos aproximadamente a las 2 pm. El curso OPEN WATER DIVER tiene una duración de mínimo 6 días, acomodados de acuerdo a disponibilidad de la instructora y el alumno.',
+    a: 'La iniciación al buceo es una única inmersión, un tanque puede durar desde 30 minutos hasta 45 minutos, dependiendo de tu consumo de aire. Te citaré 8 am, saldremos al mar y regresaremos aproximadamente a las 2 pm. El curso OPEN WATER DIVER tiene una duración de mínimo 6 días, acomodados de acuerdo a disponibilidad de la instructora y el alumno.',
   },
 ]
 

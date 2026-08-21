@@ -5,15 +5,17 @@ const experiences = [
   {
     image: '/assets/gallery/IMG_7294.jpg',
     level: 'Principiante', levelColor: 'text-white/90',
-    price: '$2,000 MXN', title: 'Experiencia Scuba',
+    price: '$2,350 MXN', title: 'Iniciación al buceo',
     description: '¿Alguna vez has soñado con volar? Esta es tu iniciación. Sin necesidad de experiencia previa, te llevamos de la mano a respirar bajo el azul por primera vez.',
     includes: [
       'Material digital',
-      '1 buceo (1 tanque) a máximo 8 metros',
-      '1 clase teórica básica',
-      'Instructora profesional privada',
+      '1 Buceo (1 tanque) a máximo 8 metros',
+      '1 Clase teórica básica',
+      'Instructora profesional privada (Carly)',
       'Equipo completo',
-      '5 fotografías subacuáticas'
+      'Fotografías / video bajo el agua',
+      'Bitácora y sticker de regalo',
+      'Lunch (volován, fruta y agua)'
     ],
     extra: 'Te citaré aproximadamente 8 am para tu clase teórica. Prepararemos tu equipo y nos iremos al mar. Tendremos una sesión de snorkel y ahora sí… ¡a bucear! Regresamos a tierra aproximadamente a las 2 pm. Incluye lunch (fruta y volovan) y una botellita de agua.',
     offset: false,
@@ -21,17 +23,17 @@ const experiences = [
   {
     image: '/assets/gallery/IMG_7310.jpg',
     level: 'Principiante', levelColor: 'text-neon-cyan',
-    price: '$9,000 MXN', title: 'Open Water Diver SNSI',
+    price: '$9,900 MXN', title: 'Open Water Diver', subtitle: 'Completamente en el mar',
     description: 'Obtén tu certificación internacional y bucea en todo el planeta hasta los 18 metros. Aprende a dominar el equipo y navega con autonomía en cualquier océano del mundo.',
     includes: [
-      'Material digital',
-      'Certificación OPEN WATER DIVER SNSI (hasta 18 metros)',
-      '5 clases teóricas (en línea o presencial)',
-      '2 días de buceo en alberca',
-      '2 días de buceo en mar',
+      'Instructora profesional privada (Carly)',
+      '5 Clases teóricas en línea (antes del buceo) y material de estudio',
+      '4 Días de buceo en mar (Sistema Arrecifal Veracruzano)',
       'Equipo completo',
-      '1 video para redes sociales',
-      '10 fotografías'
+      '¡Todas las fotografías y videos que pueda tomarte!',
+      'Bitácora y sticker de regalo',
+      'Lunch diario (volován, fruta y agua)',
+      'Certificación y trámites'
     ],
     extra: 'Los días deben programarse con anticipación. Incluye lunch en el mar.',
     offset: true,
@@ -39,35 +41,35 @@ const experiences = [
   {
     image: '/assets/gallery/IMG_9701.jpg',
     level: 'Principiante', levelColor: 'text-purple-400',
-    price: '$9,000 MXN', title: 'Junior Open Water Diver SNSI',
+    price: '$2,500 MXN', title: 'Paquete cumpleañero',
     description: 'La aventura no tiene edad, tiene actitud. Diseñado para jóvenes de 10 a 14 años que buscan explorar el mundo submarino, desarrollando disciplina y respeto por la vida marina.',
     includes: [
-      'Material digital',
-      'Certificación JUNIOR OPEN WATER DIVER SNSI (hasta 18 metros)',
-      '5 clases teóricas adaptadas a la edad',
-      '2 días de buceo en alberca',
-      '2 días de buceo en mar',
+      '1 Buceo (1 tanque) a máximo 8 metros',
+      '1 Clase teórica básica y snorkel',
+      'Instructora profesional privada (Carly)',
       'Equipo completo',
-      '1 video para redes sociales',
-      '10 fotografías'
+      'Fotografías / video con cartel de cumpleaños',
+      'Bitácora, sticker y tarjeta cumpleañera',
+      'Pastel con velita de buzo / buza',
+      'Lunch (volován, fruta y agua)'
     ],
-    extra: 'Todo está adaptado a la edad del alumnito. Los días deben programarse con anticipación. Incluye lunch en el mar.',
+    extra: 'Te citaré aproximadamente 8 am para tu clase teórica. Prepararemos tu equipo y nos iremos al mar. Tendremos una sesión de snorkel y ahora sí… ¡a bucear! Regresamos a tierra aproximadamente a las 2 pm. Incluye lunch (fruta y volovan) y una botellita de agua.',
     offset: false,
   },
   {
     image: '/assets/gallery/IMG_1687.jpg',
     level: 'Principiante', levelColor: 'text-neon-lime',
-    price: '$6,000 MXN', title: 'Scuba Diver SNSI',
+    price: '$8,500 MXN', title: 'Open Water Diver', subtitle: 'Alberca + mar',
     description: '¿Tienes poco tiempo pero aún así quieres certificarte? Este curso te permitirá bucear hasta 12 metros en cualquier parte del mundo.',
     includes: [
-      'Material digital',
-      'Certificación SCUBA DIVER SNSI (hasta 12 metros)',
-      '3 clases teóricas (en línea o presencial)',
-      '1 día de buceo en alberca',
-      '1 día de buceo en mar',
+      'Instructora profesional privada (Carly)',
+      '5 Clases teóricas en línea (antes del buceo) y material de estudio',
+      '2 Días de buceo en mar (Sistema Arrecifal Veracruzano) y 2 días en alberca',
       'Equipo completo',
-      '1 video para redes sociales',
-      '5 fotografías'
+      '¡Todas las fotografías y videos que pueda tomarte!',
+      'Bitácora y sticker de regalo',
+      'Lunch en los días de mar (volován, fruta y agua)',
+      'Certificación y trámites'
     ],
     extra: 'Los días deben programarse con anticipación. Incluye lunch en el mar.',
     offset: true,
@@ -104,8 +106,8 @@ export default function Experiences({ onReserve }) {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-          {experiences.map((exp) => (
-            <ExperienceCard key={exp.title} {...exp} onReserve={onReserve} />
+          {experiences.map((exp, index) => (
+            <ExperienceCard key={`${exp.title}-${index}`} {...exp} onReserve={onReserve} />
           ))}
         </div>
 

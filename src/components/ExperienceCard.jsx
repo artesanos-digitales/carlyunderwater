@@ -1,4 +1,4 @@
-export default function ExperienceCard({ image, level, levelColor, price, title, description, includes, extra, offset, onReserve }) {
+export default function ExperienceCard({ image, level, levelColor, price, title, subtitle, description, includes, extra, offset, onReserve }) {
 
   return (
     <div className={`group relative h-[400px] sm:h-[450px] md:h-[500px] rounded-2xl overflow-hidden cursor-pointer glass-panel border border-white/5 ${offset ? 'lg:-translate-y-6' : ''}`}>
@@ -16,7 +16,12 @@ export default function ExperienceCard({ image, level, levelColor, price, title,
         </div>
 
         <div className="transform transition-transform duration-500 group-hover:-translate-y-2">
-          <h4 className="text-lg sm:text-xl md:text-2xl font-bold mb-2">{title}</h4>
+          <h4 className={`text-lg sm:text-xl md:text-2xl font-bold ${subtitle ? 'mb-0' : 'mb-2'}`}>{title}</h4>
+          {subtitle && (
+            <p className="text-xs sm:text-sm text-neon-cyan/80 font-medium tracking-wide mb-2">
+              {subtitle}
+            </p>
+          )}
           
           {/* Descripción y "¿Qué incluye?" con fondo al hacer hover */}
           <div className="opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100">
@@ -49,7 +54,7 @@ export default function ExperienceCard({ image, level, levelColor, price, title,
           </div>
           
           <button 
-            onClick={() => onReserve(title, price)}
+            onClick={() => onReserve(title, price, subtitle)}
             className="w-full glass-panel py-2 sm:py-3 rounded-lg text-xs sm:text-sm font-medium hover:bg-neon-cyan/20 hover:text-neon-cyan transition-colors flex justify-center items-center gap-2"
           >
             Reservar

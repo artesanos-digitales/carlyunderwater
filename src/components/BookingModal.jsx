@@ -1,6 +1,13 @@
 import { useState, useEffect } from 'react'
 
-export default function BookingModal({ isOpen, onClose, serviceName, servicePrice }) {
+const getToday = () => {
+  const today = new Date()
+  const month = String(today.getMonth() + 1).padStart(2, '0')
+  const day = String(today.getDate()).padStart(2, '0')
+  return `${today.getFullYear()}-${month}-${day}`
+}
+
+export default function BookingModal({ isOpen, onClose, serviceName, serviceSubtitle, servicePrice }) {
   const [formData, setFormData] = useState({
     nombre: '',
     edad: '',
@@ -22,22 +29,28 @@ export default function BookingModal({ isOpen, onClose, serviceName, servicePric
 
   if (!isOpen) return null
 
+  const today = getToday()
+  const totalAmount = Number.parseInt(String(servicePrice).replace(/[^0-9]/g, ''), 10) || 0
+  const depositAmount = Math.round(totalAmount * 0.25)
+  const balanceAmount = totalAmount - depositAmount
+  const formatCurrency = (amount) => `$${new Intl.NumberFormat('es-MX').format(amount)} MXN`
+
   const handleSubmit = (e) => {
     e.preventDefault()
     
-    const mensaje = `Hola Carly, estoy reservando contigo.
+    const mensaje = `Carly, por favor comparteme los datos bancarios para apartar mi buceo
 
 *Servicio:* ${serviceName}
-*Precio:* ${servicePrice}
+${serviceSubtitle ? `*Modalidad:* ${serviceSubtitle}\n` : ''}*Precio total:* ${formatCurrency(totalAmount)}
+*Anticipo (25%):* ${formatCurrency(depositAmount)}
+*Saldo pendiente:* ${formatCurrency(balanceAmount)}
 
 *Datos del cliente:*
 • Nombre: ${formData.nombre}
 • Edad: ${formData.edad}
 • Celular: ${formData.celular}
 • Correo: ${formData.correo}
-• Fecha deseada: ${formData.fecha}
-
-¿Cuál es el siguiente paso para confirmar mi aventura?`
+• Fecha deseada: ${formData.fecha}`
     
     const whatsappUrl = `https://wa.me/522281773148?text=${encodeURIComponent(mensaje)}`
     window.open(whatsappUrl, '_blank')
@@ -73,12 +86,29 @@ export default function BookingModal({ isOpen, onClose, serviceName, servicePric
           </div>
           <h3 className="text-xl sm:text-2xl font-bold mb-2">Reserva tu experiencia</h3>
           <p className="text-gray-400 text-sm sm:text-base">{serviceName}</p>
-          <p className="text-neon-cyan text-lg sm:text-xl font-bold mt-2">{servicePrice}</p>
+          {serviceSubtitle && (
+            <p className="text-neon-cyan/80 text-xs sm:text-sm font-medium tracking-wide mt-1">{serviceSubtitle}</p>
+          )}
+          <p className="text-neon-cyan text-lg sm:text-xl font-bold mt-2">{formatCurrency(totalAmount)}</p>
         </div>
 
         {/* Info box */}
-        <div className="bg-neon-cyan/10 border border-neon-cyan/30 rounded-xl p-3 sm:p-4 mb-4 sm:mb-6 text-center">
-          <p className="text-neon-cyan font-semibold text-sm sm:text-base">APARTA TU LUGAR CON EL 25%</p>
+        <div className="bg-neon-cyan/10 border border-neon-cyan/30 rounded-xl p-3 sm:p-4 mb-4 sm:mb-6">
+          <p className="text-neon-cyan font-semibold text-sm sm:text-base text-center mb-3">APARTA TU LUGAR CON EL 25%</p>
+          <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-xs sm:text-sm">
+            <span className="text-gray-400">Precio total</span>
+            <span className="text-right text-white font-semibold">{formatCurrency(totalAmount)}</span>
+            <span className="text-gray-400">Anticipo (25%)</span>
+            <span className="text-right text-neon-cyan font-semibold">{formatCurrency(depositAmount)}</span>
+            <span className="text-gray-400">Saldo pendiente</span>
+            <span className="text-right text-white font-semibold">{formatCurrency(balanceAmount)}</span>
+          </div>
+          <p className="text-gray-300 text-[11px] sm:text-xs leading-relaxed mt-3 pt-3 border-t border-white/10">
+            El anticipo no es reembolsable. Solo puedes cambiar la fecha avisando con al menos 48 horas de anticipación al buceo.
+          </p>
+          <p className="text-gray-400 text-[11px] sm:text-xs leading-relaxed mt-2">
+            El anticipo se realiza por transferencia; te compartiré los datos por WhatsApp y juntos revisamos las fechas disponibles.
+          </p>
         </div>
 
         {/* Form */}
@@ -96,11 +126,12 @@ export default function BookingModal({ isOpen, onClose, serviceName, servicePric
           </div>
 
           <div>
-            <label className="block text-sm text-gray-400 mb-2">Fecha *</label>
+            <label className="block text-sm text-gray-400 mb-2">Fecha deseada (se revisa disponibilidad) *</label>
             <div className="relative">
               <input
                 type="date"
                 required
+                min={today}
                 value={formData.fecha}
                 onChange={(e) => setFormData({...formData, fecha: e.target.value})}
                 className="w-full bg-deep-900/50 border border-white/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-neon-cyan focus:ring-1 focus:ring-neon-cyan transition-colors text-sm sm:text-base"

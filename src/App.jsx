@@ -13,14 +13,14 @@ import FAQ from './components/FAQ'
 import Footer from './components/Footer'
 
 export default function App() {
-  const [bookingModal, setBookingModal] = useState({ isOpen: false, service: '', price: '' })
+  const [bookingModal, setBookingModal] = useState({ isOpen: false, service: '', subtitle: '', price: '' })
 
-  const openBookingModal = (service, price) => {
-    setBookingModal({ isOpen: true, service, price })
+  const openBookingModal = (service, price, subtitle = '') => {
+    setBookingModal({ isOpen: true, service, subtitle, price })
   }
 
   const closeBookingModal = () => {
-    setBookingModal({ isOpen: false, service: '', price: '' })
+    setBookingModal({ isOpen: false, service: '', subtitle: '', price: '' })
   }
 
   return (
@@ -37,6 +37,7 @@ export default function App() {
         isOpen={bookingModal.isOpen} 
         onClose={closeBookingModal}
         serviceName={bookingModal.service}
+        serviceSubtitle={bookingModal.subtitle}
         servicePrice={bookingModal.price}
       />
       <FAQ />
