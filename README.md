@@ -19,4 +19,6 @@ _Deployed automatically to carlyunderwater.com.mx on every push to main (Dokploy
 
 ## Deployment
 
-Auto-deployed to Dokploy (el-horno) on every push to `main` via GitHub webhook.
+Auto-deployed to Dokploy (el-horno) on every push to `main`.
+
+Pipeline: GitHub push webhook → `https://deploy.carlyunderwater.com.mx/api/deploy/<token>` → Dokploy build (Dockerfile) → Swarm service `carlyunderwater-l3blm3`.
