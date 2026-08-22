@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { CaretDown } from '@phosphor-icons/react'
 
 const faqs = [
   {
@@ -37,35 +38,35 @@ export default function FAQ() {
   const toggle = (i) => setOpen(open === i ? null : i)
 
   return (
-    <section id="faq" className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 md:px-12 bg-deep-900 relative">
+    <section id="faq" className="py-16 sm:py-20 md:py-28 px-4 sm:px-6 md:px-12 bg-deep-900 relative">
       <div ref={ref} className="max-w-3xl mx-auto reveal">
-        <div className="text-center mb-8 sm:mb-12">
-          <h2 className="text-xs sm:text-sm font-mono text-neon-cyan tracking-[0.2em] mb-2">// BASE DE CONOCIMIENTO</h2>
-          <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold">Preguntas Frecuentes</h3>
-        </div>
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-10 sm:mb-14">
+          Preguntas frecuentes
+        </h2>
 
         <div className="space-y-3 sm:space-y-4">
           {faqs.map((faq, i) => (
             <div
               key={i}
-              className={`glass-panel rounded-xl overflow-hidden border border-white/5 transition-all duration-300 ${open === i ? 'bg-white/5' : ''}`}
+              className={`glass-panel rounded-xl overflow-hidden border border-white/5 transition-colors duration-300 ${open === i ? 'bg-white/5' : ''}`}
             >
               <button
-                className="w-full px-4 sm:px-6 py-4 sm:py-5 text-left flex justify-between items-center focus:outline-none"
+                className="w-full px-4 sm:px-6 py-4 sm:py-5 text-left flex justify-between items-center gap-4"
+                aria-expanded={open === i}
                 onClick={() => toggle(i)}
               >
-                <span className="font-semibold text-sm sm:text-base md:text-lg pr-2">{faq.q}</span>
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-all duration-300 ${open === i ? 'rotate-180 bg-neon-cyan text-deep-900' : 'bg-white/5'}`}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-neon-cyan">
-                    <path d="m6 9 6 6 6-6"/>
-                  </svg>
-                </div>
+                <span className="font-semibold text-sm sm:text-base md:text-lg">{faq.q}</span>
+                <CaretDown
+                  size={16}
+                  weight="bold"
+                  className={`shrink-0 transition-transform duration-300 text-neon-cyan ${open === i ? 'rotate-180' : ''}`}
+                />
               </button>
               <div
                 className="overflow-hidden transition-all duration-300"
                 style={{ maxHeight: open === i ? '300px' : '0px', opacity: open === i ? 1 : 0 }}
               >
-                <p className="text-gray-400 px-4 sm:px-6 pb-4 sm:pb-5 text-sm sm:text-base">{faq.a}</p>
+                <p className="text-gray-400 px-4 sm:px-6 pb-5 text-sm sm:text-base">{faq.a}</p>
               </div>
             </div>
           ))}

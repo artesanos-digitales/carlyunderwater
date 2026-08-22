@@ -1,10 +1,10 @@
 import { useEffect, useRef } from 'react'
+import { ArrowRight } from '@phosphor-icons/react'
 import ExperienceCard from './ExperienceCard'
 
 const experiences = [
   {
     image: '/assets/gallery/IMG_7294.jpg',
-    level: 'Principiante', levelColor: 'text-white/90',
     price: '$2,350 MXN', title: 'Iniciación al buceo',
     description: '¿Alguna vez has soñado con volar? Esta es tu iniciación. Sin necesidad de experiencia previa, te llevamos de la mano a respirar bajo el azul por primera vez.',
     includes: [
@@ -22,7 +22,6 @@ const experiences = [
   },
   {
     image: '/assets/gallery/IMG_7310.jpg',
-    level: 'Principiante', levelColor: 'text-neon-cyan',
     price: '$9,900 MXN', title: 'Open Water Diver', subtitle: 'Completamente en el mar',
     description: 'Obtén tu certificación internacional y bucea en todo el planeta hasta los 18 metros. Aprende a dominar el equipo y navega con autonomía en cualquier océano del mundo.',
     includes: [
@@ -40,7 +39,6 @@ const experiences = [
   },
   {
     image: '/assets/gallery/IMG_9701.jpg',
-    level: 'Principiante', levelColor: 'text-purple-400',
     price: '$2,500 MXN', title: 'Paquete cumpleañero',
     description: 'La aventura no tiene edad, tiene actitud. Diseñado para jóvenes de 10 a 14 años que buscan explorar el mundo submarino, desarrollando disciplina y respeto por la vida marina.',
     includes: [
@@ -58,7 +56,6 @@ const experiences = [
   },
   {
     image: '/assets/gallery/IMG_1687.jpg',
-    level: 'Principiante', levelColor: 'text-neon-lime',
     price: '$8,500 MXN', title: 'Open Water Diver', subtitle: 'Alberca + mar',
     description: '¿Tienes poco tiempo pero aún así quieres certificarte? Este curso te permitirá bucear hasta 12 metros en cualquier parte del mundo.',
     includes: [
@@ -91,16 +88,15 @@ export default function Experiences({ onReserve }) {
   }, [])
 
   return (
-    <section id="experiences" className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 md:px-12 relative">
+    <section id="experiences" className="py-16 sm:py-20 md:py-28 px-4 sm:px-6 md:px-12 relative">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-ocean-900/20 rounded-full blur-[120px] pointer-events-none" />
 
       <div ref={ref} className="max-w-7xl mx-auto relative z-10 reveal">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-8 sm:mb-12 gap-4 sm:gap-6">
-          <div>
-            <h2 className="text-xs sm:text-sm font-mono text-neon-cyan tracking-[0.2em] mb-2">// Experiencias</h2>
-            <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">Inmersiones y certificaciones</h3>
-          </div>
-          <p className="text-gray-400 max-w-md text-sm md:text-base">
+        <div className="mb-10 sm:mb-14 max-w-2xl">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-4">
+            Inmersiones y certificaciones
+          </h2>
+          <p className="text-gray-400 text-base md:text-lg max-w-[52ch]">
             Experiencias privadas. Incluye una sesión de fotos y/o video.
           </p>
         </div>
@@ -111,18 +107,13 @@ export default function Experiences({ onReserve }) {
           ))}
         </div>
 
-        <div className="mt-8 sm:mt-12 text-center">
-          <button 
+        <div className="mt-10 sm:mt-14 flex justify-center">
+          <button
             onClick={() => document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' })}
-            className="group relative inline-flex items-center justify-center px-6 sm:px-8 md:px-12 py-4 sm:py-5 text-base sm:text-lg md:text-xl font-bold text-deep-900 bg-neon-cyan rounded-xl sm:rounded-2xl overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_rgba(34,211,238,0.6)] shadow-xl mx-4"
+            className="group inline-flex items-center gap-2 px-7 py-3 text-base font-semibold text-neon-cyan border border-neon-cyan/30 rounded-full hover:bg-neon-cyan/10 active:scale-[0.98] transition-all"
           >
-            <span className="absolute w-0 h-0 transition-all duration-700 ease-out bg-white rounded-full group-hover:w-[500px] group-hover:h-[500px] opacity-20" />
-            <span className="relative flex items-center gap-2 sm:gap-3 text-center">
-              ¿No sabes cuál es tu mejor opción? Click aquí
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" sm:width="24" height="20" sm:height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:translate-x-2 shrink-0">
-                <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
-              </svg>
-            </span>
+            Ayúdame a elegir
+            <ArrowRight size={18} weight="bold" className="transition-transform duration-300 group-hover:translate-x-1" />
           </button>
         </div>
       </div>

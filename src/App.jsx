@@ -28,20 +28,22 @@ export default function App() {
       <Navbar />
       <MusicPlayer />
       <DepthIndicator />
-      <Hero />
-      <Experiences onReserve={openBookingModal} />
-      <Quiz />
-      <Gallery />
-      <Booking />
-      <BookingModal 
-        isOpen={bookingModal.isOpen} 
+      <main>
+        <Hero />
+        <Experiences onReserve={openBookingModal} />
+        <Quiz onReserve={openBookingModal} />
+        <Gallery onReserve={openBookingModal} />
+        <Booking onReserve={openBookingModal} />
+        <FAQ />
+      </main>
+      <Footer />
+      <BookingModal
+        isOpen={bookingModal.isOpen}
         onClose={closeBookingModal}
         serviceName={bookingModal.service}
         serviceSubtitle={bookingModal.subtitle}
         servicePrice={bookingModal.price}
       />
-      <FAQ />
-      <Footer />
     </>
   )
 }

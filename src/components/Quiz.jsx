@@ -1,4 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
+import {
+  ArrowRight, Check, Clock, Heart, ListChecks, ShieldCheck, Target, Timer,
+} from '@phosphor-icons/react'
 
 const questions = [
   {
@@ -13,7 +16,7 @@ const questions = [
   },
   {
     id: 2,
-    question: '¿Qué buscas encontrar después inmersión?',
+    question: '¿Qué buscas encontrar después de la inmersión?',
     options: [
       { text: 'Una experiencia épica de un solo día para tachar de mi lista de deseos.', scores: { scuba: 3, openwater: 0, junior: 0, scubadiver: 0 } },
       { text: 'Quiero poder bucear en cualquier parte del mundo.', scores: { scuba: 0, openwater: 3, junior: 0, scubadiver: 1 } },
@@ -61,7 +64,6 @@ const results = {
     match: 95,
     description: '¡Tu primera inmersión te espera! Vive la experiencia de respirar bajo el agua por primera vez. Una mañana inolvidable en el Sistema Arrecifal Veracruzano.',
     highlights: ['Sin experiencia necesaria', 'Solo una mañana (~6 horas)', 'Equipo completo incluido', 'Fotografías / video bajo el agua'],
-    color: 'from-neon-cyan to-blue-500'
   },
   junior: {
     title: 'Paquete cumpleañero',
@@ -70,7 +72,6 @@ const results = {
     match: 92,
     description: 'Celebra una ocasión especial bajo el agua con una experiencia divertida, segura y llena de recuerdos.',
     highlights: ['Buceo y snorkel', 'Cartel de cumpleaños', 'Pastel con velita de buzo / buza', 'Fotografías y video'],
-    color: 'from-purple-500 to-pink-500'
   },
   openwater: {
     title: 'Open Water Diver',
@@ -79,7 +80,6 @@ const results = {
     match: 88,
     description: 'Tu paso hacia la certificación internacional completa. Desbloquea el acceso a bucear hasta 18 metros en cualquier parte del mundo, de por vida.',
     highlights: ['5 clases teóricas en línea', '4 días de buceo en mar', 'Fotografías y videos', 'Certificación y trámites'],
-    color: 'from-orange-500 to-red-500'
   },
   scubadiver: {
     title: 'Open Water Diver',
@@ -88,11 +88,10 @@ const results = {
     match: 90,
     description: 'Obtén tu certificación con un programa que combina clases teóricas, buceo en alberca y prácticas en el Sistema Arrecifal Veracruzano.',
     highlights: ['5 clases teóricas en línea', '2 días de mar y 2 de alberca', 'Fotografías y videos', 'Certificación y trámites'],
-    color: 'from-neon-lime to-green-500'
   }
 }
 
-export default function quiz() {
+export default function Quiz({ onReserve }) {
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [scores, setScores] = useState({ scuba: 0, junior: 0, openwater: 0, scubadiver: 0 })
   const [showResult, setShowResult] = useState(false)
@@ -113,7 +112,7 @@ export default function quiz() {
 
   const handleAnswer = (option) => {
     setSelectedOption(option)
-    
+
     setTimeout(() => {
       const newScores = { ...scores }
       Object.keys(option.scores).forEach(key => {
@@ -151,129 +150,104 @@ export default function quiz() {
   const progress = ((currentQuestion + 1) / questions.length) * 100
 
   return (
-    <section id="quiz" className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 md:px-12 relative overflow-hidden">
-      {/* Background effects */}
+    <section id="quiz" className="py-16 sm:py-20 md:py-28 px-4 sm:px-6 md:px-12 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-deep-900 via-ocean-900/50 to-deep-900" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] sm:w-[600px] h-[400px] sm:h-[600px] bg-neon-cyan/5 rounded-full blur-[150px] pointer-events-none" />
-      
+
       <div ref={ref} className="max-w-3xl mx-auto relative z-10 reveal">
-        {/* Header */}
-        <div className="text-center mb-6 sm:mb-8 md:mb-12 px-2">
-          <div className="inline-flex items-center gap-2 glass-panel px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-mono text-neon-cyan mb-3 sm:mb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" sm:width="16" height="14" sm:height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="animate-pulse">
-              <circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/>
-            </svg>
-            TEST DE BUCEO
-          </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4">Descubre Tu Experiencia Ideal</h2>
-          <p className="text-gray-400 text-sm sm:text-base md:text-lg">Responde 5 preguntas y te recomendaremos la inmersión perfecta para ti.</p>
+        <div className="text-center mb-8 sm:mb-12 px-2">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-4">
+            Descubre tu experiencia ideal
+          </h2>
+          <p className="text-gray-400 text-base md:text-lg">Responde 5 preguntas y te recomendamos la inmersión perfecta para ti.</p>
         </div>
 
-        {/* Quiz Card */}
         <div className="glass-panel rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 lg:p-12 border border-white/10 shadow-2xl shadow-black/50">
           {!quizStarted ? (
-            /* Welcome Screen */
+            /* Pantalla de inicio */
             <div className="text-center py-4 sm:py-8">
-              <div className="w-16 sm:w-20 h-16 sm:h-20 mx-auto mb-4 sm:mb-6 rounded-full bg-gradient-to-br from-neon-cyan/20 to-blue-500/20 flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" sm:width="40" height="32" sm:height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-neon-cyan">
-                  <path d="M2 12h20"/><path d="M12 2v20"/><path d="m4.93 4.93 14.14 14.14"/><path d="m4.93 19.07 14.14-14.14"/><circle cx="12" cy="12" r="3"/>
-                </svg>
-              </div>
-              <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">¿Listo para bucear?</h3>
-              <p className="text-gray-400 mb-6 sm:mb-8 max-w-md mx-auto text-sm sm:text-base">
-                En menos de 2 minutos, analizaremos tu experiencia, objetivos y preferencias para encontrar la experiencia de buceo perfecta para ti.
+              <h3 className="text-xl sm:text-2xl font-bold mb-4">¿Listo para bucear?</h3>
+              <p className="text-gray-400 mb-8 max-w-md mx-auto text-sm sm:text-base">
+                En menos de 2 minutos, analizamos tu experiencia, objetivos y preferencias para encontrar la experiencia de buceo perfecta para ti.
               </p>
-              <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-6 sm:mb-8">
-                <div className="glass-panel px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm">
-                  <span className="text-neon-cyan">⏱</span> 2 minutos
+              <div className="flex flex-wrap justify-center gap-3 mb-8">
+                <div className="glass-panel inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm text-gray-300">
+                  <Timer size={16} className="text-neon-cyan" /> 2 minutos
                 </div>
-                <div className="glass-panel px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm">
-                  <span className="text-neon-cyan">📋</span> 5 preguntas
+                <div className="glass-panel inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm text-gray-300">
+                  <ListChecks size={16} className="text-neon-cyan" /> 5 preguntas
                 </div>
-                <div className="glass-panel px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm">
-                  <span className="text-neon-cyan">🎯</span> Recomendación precisa
+                <div className="glass-panel inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm text-gray-300">
+                  <Target size={16} className="text-neon-cyan" /> Recomendación precisa
                 </div>
               </div>
               <button
                 onClick={() => setQuizStarted(true)}
-                className="group relative inline-flex items-center justify-center px-6 sm:px-10 py-3 sm:py-4 text-sm sm:text-base font-semibold text-deep-900 bg-neon-cyan rounded-full overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(34,211,238,0.5)]"
+                className="group inline-flex items-center gap-2 px-8 py-3.5 text-base font-semibold text-deep-900 bg-neon-cyan rounded-full transition-all duration-300 hover:scale-[1.03] active:scale-[0.98]"
               >
-                <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-full group-hover:w-56 group-hover:h-56 opacity-10" />
-                <span className="relative flex items-center gap-2">
-                  COMENZAR TEST
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" sm:width="20" height="16" sm:height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:translate-x-1">
-                    <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
-                  </svg>
-                </span>
+                Comenzar test
+                <ArrowRight size={18} weight="bold" className="transition-transform duration-300 group-hover:translate-x-1" />
               </button>
             </div>
           ) : showResult ? (
-            /* Result Screen */
+            /* Resultado */
             <div className="text-center py-4">
-              <div className={`inline-flex items-center justify-center w-20 sm:w-24 h-20 sm:h-24 rounded-full bg-gradient-to-br ${resultData.color} mb-4 sm:mb-6 shadow-lg`}>
-                <span className="text-2xl sm:text-3xl font-bold text-deep-900">{resultData.match}%</span>
+              <div className="inline-flex items-center justify-center w-20 sm:w-24 h-20 sm:h-24 rounded-full bg-neon-cyan/15 border border-neon-cyan/30 mb-6">
+                <span className="text-2xl sm:text-3xl font-bold text-neon-cyan">{resultData.match}%</span>
               </div>
-              
-              <span className="inline-block glass-panel px-3 sm:px-4 py-1 rounded-full text-[10px] sm:text-xs font-mono text-neon-cyan mb-3 sm:mb-4">
-                TU MEJOR OPCIÓN
-              </span>
-              
+
               <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2">{resultData.title}</h3>
-              <div className="flex items-center justify-center gap-2 sm:gap-4 mb-4 sm:mb-6">
+              <div className="flex items-center justify-center gap-3 mb-6">
                 <span className="text-lg sm:text-xl md:text-2xl font-bold text-neon-cyan">{resultData.price}</span>
-                <span className="text-gray-400">•</span>
+                <span className="text-gray-500" aria-hidden="true">/</span>
                 <span className="text-gray-400 text-sm sm:text-base">{resultData.level}</span>
               </div>
-              
-              <p className="text-gray-300 mb-6 sm:mb-8 max-w-lg mx-auto text-sm sm:text-base px-2">{resultData.description}</p>
-              
-              <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-6 sm:mb-8">
+
+              <p className="text-gray-300 mb-8 max-w-lg mx-auto text-sm sm:text-base px-2">{resultData.description}</p>
+
+              <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-8">
                 {resultData.highlights.map((highlight, i) => (
-                  <div key={i} className="glass-panel p-2 sm:p-3 rounded-xl border border-white/5">
-                    <span className="text-neon-cyan text-xs sm:text-sm">✓</span>
-                    <p className="text-[10px] sm:text-xs text-gray-300 mt-1">{highlight}</p>
+                  <div key={i} className="glass-panel p-2 sm:p-3 rounded-xl border border-white/5 text-left">
+                    <Check size={14} weight="bold" className="text-neon-cyan" />
+                    <p className="text-[11px] sm:text-xs text-gray-300 mt-1">{highlight}</p>
                   </div>
                 ))}
               </div>
-              
+
               <div className="flex flex-col gap-3 sm:flex-row sm:gap-4 justify-center">
                 <button
-                  onClick={() => document.getElementById('booking').scrollIntoView({ behavior: 'smooth' })}
-                  className="px-6 sm:px-8 py-3 bg-neon-cyan text-deep-900 font-bold rounded-full hover:shadow-[0_0_25px_rgba(34,211,238,0.5)] transition-all text-sm sm:text-base"
+                  onClick={() => onReserve(resultData.title, resultData.price, resultData.level)}
+                  className="px-8 py-3 bg-neon-cyan text-deep-900 font-bold rounded-full hover:scale-[1.02] active:scale-[0.98] transition-all text-sm sm:text-base"
                 >
-                  Reservar Ahora
+                  Reservar
                 </button>
                 <button
                   onClick={resetQuiz}
-                  className="px-6 sm:px-8 py-3 glass-panel text-white rounded-full border border-white/20 hover:bg-white/10 transition-all text-sm sm:text-base"
+                  className="px-8 py-3 glass-panel text-white rounded-full border border-white/20 hover:bg-white/10 active:scale-[0.98] transition-all text-sm sm:text-base"
                 >
                   Hacer el test de nuevo
                 </button>
               </div>
             </div>
           ) : (
-            /* Question Screen */
+            /* Pregunta */
             <>
-              {/* Progress */}
-              <div className="mb-6 sm:mb-8">
+              <div className="mb-8">
                 <div className="flex justify-between items-center mb-2">
                   <span className="text-xs sm:text-sm text-gray-400">Pregunta {currentQuestion + 1} de {questions.length}</span>
                   <span className="text-xs sm:text-sm text-neon-cyan font-mono">{Math.round(progress)}%</span>
                 </div>
                 <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-gradient-to-r from-neon-cyan to-blue-500 transition-all duration-500 rounded-full"
+                    className="h-full bg-neon-cyan transition-all duration-500 rounded-full"
                     style={{ width: `${progress}%` }}
                   />
                 </div>
               </div>
 
-              {/* Question */}
-              <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold mb-6 sm:mb-8 text-center px-2">
+              <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold mb-8 text-center px-2">
                 {questions[currentQuestion].question}
               </h3>
 
-              {/* Options */}
               <div className="space-y-2 sm:space-y-4">
                 {questions[currentQuestion].options.map((option, i) => (
                   <button
@@ -286,7 +260,7 @@ export default function quiz() {
                         : 'glass-panel border-white/10 hover:border-white/30 hover:bg-white/5'
                     } ${selectedOption !== null && selectedOption !== option ? 'opacity-50' : ''}`}
                   >
-                    <span className="flex items-center gap-2 sm:gap-3">
+                    <span className="flex items-center gap-3">
                       <span className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-xs sm:text-sm font-bold transition-colors shrink-0 ${
                         selectedOption === option
                           ? 'bg-neon-cyan text-deep-900'
@@ -300,17 +274,16 @@ export default function quiz() {
                 ))}
               </div>
 
-              {/* Navigation dots */}
-              <div className="flex justify-center gap-2 mt-6 sm:mt-8">
+              <div className="flex justify-center gap-2 mt-8">
                 {questions.map((_, i) => (
                   <div
                     key={i}
-                    className={`w-2 h-2 rounded-full transition-all ${
+                    className={`h-2 rounded-full transition-all ${
                       i === currentQuestion
                         ? 'w-6 sm:w-8 bg-neon-cyan'
                         : i < currentQuestion
-                        ? 'bg-neon-cyan/50'
-                        : 'bg-white/20'
+                        ? 'w-2 bg-neon-cyan/50'
+                        : 'w-2 bg-white/20'
                     }`}
                   />
                 ))}
@@ -319,25 +292,18 @@ export default function quiz() {
           )}
         </div>
 
-        {/* Trust indicators */}
-        {!showResult && quizStarted && (
-          <div className="flex flex-wrap justify-center gap-4 sm:gap-8 mt-6 sm:mt-8 text-xs sm:text-sm text-gray-500">
+        {quizStarted && !showResult && (
+          <div className="flex flex-wrap justify-center gap-4 sm:gap-8 mt-8 text-xs sm:text-sm text-gray-500">
             <div className="flex items-center gap-2">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" sm:width="16" height="14" sm:height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-neon-cyan">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/>
-              </svg>
+              <ShieldCheck size={16} weight="fill" className="text-neon-cyan" />
               Respuestas privadas
             </div>
             <div className="flex items-center gap-2">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" sm:width="16" height="14" sm:height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-neon-cyan">
-                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-              </svg>
+              <Clock size={16} className="text-neon-cyan" />
               Menos de 2 min
             </div>
             <div className="flex items-center gap-2">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" sm:width="16" height="14" sm:height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-neon-cyan">
-                <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
-              </svg>
+              <Heart size={16} weight="fill" className="text-neon-cyan" />
               +2,000 buzos
             </div>
           </div>
