@@ -2,7 +2,7 @@
 FROM node:22-alpine AS build
 WORKDIR /app
 COPY package.json package-lock.json ./
-RUN rm -f package-lock.json && npm install --include=optional
+RUN rm -f package-lock.json && npm install --include=optional --ignore-scripts
 COPY . .
 RUN npm run build
 
