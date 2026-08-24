@@ -27,7 +27,7 @@ export default function Navbar() {
     <>
       <div ref={sentinelRef} aria-hidden="true" className="absolute top-0 left-0 w-full h-px pointer-events-none" />
       <nav
-        className={`fixed w-full z-50 transition-all duration-300 py-4 px-6 md:px-12 border-b ${
+        className={`fixed w-full z-50 transition-all duration-300 py-3 px-6 md:px-12 border-b ${
           scrolled || menuOpen ? 'glass-panel border-white/10' : 'border-transparent'
         }`}
         aria-label="Principal"

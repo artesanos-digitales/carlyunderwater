@@ -41,15 +41,13 @@ export default function DepthIndicator() {
     <div
       ref={rootRef}
       aria-hidden="true"
-      className="hidden sm:flex fixed right-6 md:right-8 top-1/2 -translate-y-1/2 z-40 flex-col items-center pointer-events-none mix-blend-screen opacity-40 md:opacity-70"
+      className="hidden sm:flex fixed right-6 md:right-8 top-1/2 -translate-y-1/2 z-40 flex-col items-center pointer-events-none opacity-50 md:opacity-70"
     >
-      <div className="text-[10px] font-mono text-neon-cyan rotate-90 mb-10 tracking-widest">DEPTH</div>
       <div className="h-48 w-px bg-white/20 relative">
         <div ref={fillRef} className="absolute top-0 left-0 w-full bg-neon-cyan/50" />
         <div
           ref={markerRef}
-          className="absolute -translate-x-1/2 left-1/2 w-2 h-2 rounded-full bg-neon-cyan shadow-[0_0_10px_rgba(34,211,238,1)]"
-          style={{ marginLeft: '-4px' }}
+          className="absolute left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-neon-cyan"
         />
       </div>
       <div ref={labelRef} className="text-sm font-mono text-neon-cyan mt-4 w-12 text-center font-bold">

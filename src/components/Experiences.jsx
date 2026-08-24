@@ -88,11 +88,11 @@ export default function Experiences({ onReserve }) {
   }, [])
 
   return (
-    <section id="experiences" className="py-16 sm:py-20 md:py-28 px-4 sm:px-6 md:px-12 relative">
+    <section id="experiences" className="py-20 sm:py-24 md:py-32 px-4 sm:px-6 md:px-12 relative">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-ocean-900/20 rounded-full blur-[120px] pointer-events-none" />
 
       <div ref={ref} className="max-w-7xl mx-auto relative z-10 reveal">
-        <div className="mb-10 sm:mb-14 max-w-2xl">
+        <div className="mb-12 sm:mb-16 max-w-2xl">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-4">
             Inmersiones y certificaciones
           </h2>
@@ -101,7 +101,7 @@ export default function Experiences({ onReserve }) {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-7">
           {experiences.map((exp, index) => (
             <ExperienceCard key={`${exp.title}-${index}`} {...exp} onReserve={onReserve} />
           ))}

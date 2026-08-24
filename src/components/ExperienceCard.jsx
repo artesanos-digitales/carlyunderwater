@@ -1,9 +1,9 @@
 import { Check, ArrowRight } from '@phosphor-icons/react'
 
-export default function ExperienceCard({ image, price, title, subtitle, description, includes, extra, offset, onReserve }) {
+export default function ExperienceCard({ image, price, title, subtitle, description, includes, extra, onReserve }) {
 
   return (
-    <div className={`group relative h-[400px] sm:h-[450px] md:h-[500px] rounded-2xl overflow-hidden glass-panel border border-white/5 ${offset ? 'lg:-translate-y-6' : ''}`}>
+    <div className="group relative min-h-[380px] sm:min-h-[440px] md:min-h-[480px] rounded-2xl overflow-hidden glass-panel">
       <img
         src={image}
         alt={`Experiencia: ${title}${subtitle ? ` (${subtitle})` : ''}`}
