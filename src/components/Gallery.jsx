@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { ArrowRight } from '@phosphor-icons/react'
+import Carousel from './Carousel'
 
 const photos = [
   { src: '/assets/gallery/IMG_1643.jpg', alt: 'Inmersión en el Sistema Arrecifal Veracruzano' },
@@ -53,10 +54,11 @@ export default function Gallery({ onReserve }) {
           </p>
         </div>
 
-        <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 sm:gap-6 space-y-4 sm:space-y-6">
-          {photos.map((photo, i) =>
+        <Carousel
+          items={photos}
+          renderSlide={(photo) =>
             photo === null ? (
-              <div key="cta" className="group relative break-inside-avoid rounded-xl overflow-hidden p-6 sm:p-8 glass-panel flex flex-col justify-center items-center text-center aspect-square">
+              <div className="w-full h-full p-6 sm:p-8 glass-panel flex flex-col justify-center items-center text-center">
                 <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-3">¿Quieres ver más?</h3>
                 <p className="text-gray-400 text-xs sm:text-sm mb-6 max-w-[32ch]">Únete a nuestras inmersiones y forma parte de la galería.</p>
                 <button
@@ -68,17 +70,15 @@ export default function Gallery({ onReserve }) {
                 </button>
               </div>
             ) : (
-              <figure key={i} className="group relative break-inside-avoid rounded-xl overflow-hidden">
-                <img
-                  src={photo.src}
-                  alt={photo.alt}
-                  loading="lazy"
-                  className="w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-              </figure>
+              <img
+                src={photo.src}
+                alt={photo.alt}
+                loading="lazy"
+                className="w-full h-full object-cover"
+              />
             )
-          )}
-        </div>
+          }
+        />
       </div>
     </section>
   )
